@@ -1,0 +1,10 @@
+# Database
+chroma_db/
+*.sqlite3
+
+# Environment variables / Secrets
+.env
+
+# Python caching
+__pycache__/
+*.pyc
