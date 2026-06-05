@@ -1,0 +1,5 @@
+fastapi
+uvicorn[standard]
+llama-index-llms-openai
+python-dotenv
+pydantic
