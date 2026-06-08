@@ -1,0 +1,20 @@
+Logiqbits HCM — Human Capital Management
+
+Logiqbits HCM is a comprehensive HR management solution covering the full employee lifecycle from onboarding to offboarding.
+
+Key Features:
+- Employee Records: Centralized database for all employee information including personal details, job history, contracts, and documents.
+- Attendance & Leave: Track daily attendance, manage leave requests, approve or reject leaves, and view leave balances.
+- Payroll Management: Automated payroll calculation based on attendance, overtime, deductions, and bonuses. Supports multiple pay grades.
+- Performance Reviews: Set KPIs, conduct quarterly or annual reviews, and track employee performance over time.
+- Recruitment: Post job openings, manage applicants, schedule interviews, and onboard new hires.
+- Org Chart: Visual organizational hierarchy showing departments, teams, and reporting lines.
+
+Common Use Cases:
+- An HR manager wants to process monthly payroll for 50 employees automatically.
+- An employee wants to apply for annual leave and track its approval status.
+- Management wants to review performance scores before deciding on promotions.
+- HR wants to onboard a new hire and set up their profile, access, and contracts.
+
+Departments Supported:
+HCM supports unlimited departments and sub-departments. Each department can have its own leave policies, working hours, and pay structures.

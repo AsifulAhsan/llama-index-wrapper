@@ -1,0 +1,19 @@
+SaleSense CRM by Logiqbits
+
+SaleSense CRM is a customer relationship management platform designed to help sales teams track leads, manage pipelines, and close deals faster.
+
+Key Features:
+- Lead Management: Capture, assign, and track leads from multiple sources including web forms, emails, and manual entry.
+- Sales Pipeline: Visual kanban-style pipeline showing deals at each stage — New, Contacted, Qualified, Proposal, Negotiation, Closed Won, Closed Lost.
+- Contact Management: Store and manage customer profiles including contact details, interaction history, notes, and attached documents.
+- Activity Tracking: Log calls, meetings, emails, and follow-up tasks against each contact or deal.
+- Reports & Analytics: Generate sales performance reports, conversion rates, team leaderboards, and revenue forecasts.
+- Team Collaboration: Assign leads to sales reps, set reminders, and leave internal notes on deals.
+
+Common Use Cases:
+- A sales manager wants to see which deals are stuck in the pipeline and need follow-up.
+- A sales rep wants to log a call with a client and set a follow-up reminder for next week.
+- Management wants a monthly revenue forecast based on current pipeline values.
+
+Pricing:
+SaleSense CRM is available as part of the Logiqbits suite. Contact sales@logiqbits.com for pricing details.

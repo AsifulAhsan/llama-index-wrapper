@@ -1,9 +1,0 @@
-Logiqbits is a technology company offering business solutions.
-
-FiNext Lite is an SME ERP and Finance solution that helps small and medium businesses manage their finances, inventory, and operations in one place.
-
-ShopAP is an accounts payable automation tool that streamlines invoice processing and vendor payments.
-
-SaleSense CRM is a customer relationship management platform designed to help sales teams track leads, manage pipelines, and close deals faster.
-
-HCM (Human Capital Management) is Logiqbits' HR solution covering employee management, payroll, attendance, and performance tracking.

@@ -33,21 +33,48 @@ llm = OpenAILike(
     context_window=8192,
 )
 
-# ====================== EMBEDDING + CHROMA CONFIG ======================
+# ====================== EMBEDDING CONFIG ======================
 embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
-
 Settings.llm = llm
 Settings.embed_model = embed_model
 
-# Load persisted ChromaDB
-chroma_client = chromadb.PersistentClient(path="./chroma_db")
-chroma_collection = chroma_client.get_or_create_collection("knowledge_base")
-vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
-index = VectorStoreIndex.from_vector_store(
-    vector_store,
-    embed_model=embed_model,
-)
-retriever = index.as_retriever(similarity_top_k=3)
+# ====================== COLLECTION CONFIG ======================
+
+ACTIVE_COLLECTION = "crm"  # options: "crm", "hrm", "core", "direct"
+
+SYSTEM_PROMPTS = {
+    "crm": """You are a CRM specialist AI assistant for Logiqbits SaleSense CRM.
+You help users with customer relationship management, sales pipelines, lead tracking, and deal management.
+Be concise, accurate, and solution-oriented. Use the provided context when available.""",
+
+    "hrm": """You are an HRM specialist AI assistant for Logiqbits HCM.
+You help users with human resource management, payroll, attendance, employee records, and performance tracking.
+Be concise, accurate, and solution-oriented. Use the provided context when available.""",
+
+    "core": """You are a core business AI assistant for Logiqbits.
+You help users with FiNext Lite ERP, finance management, inventory, and general business operations.
+Be concise, accurate, and solution-oriented. Use the provided context when available.""",
+
+    "direct": """You are a helpful, professional AI assistant for Logiqbits (https://logiqbits.com/).
+You specialize in all Logiqbits business solutions including FiNext Lite, ShopAP, SaleSense CRM, HCM, Automation, and Cloud services.
+Be concise, accurate, and solution-oriented. Use the provided context when available.""",
+}
+
+# ====================== LOAD ACTIVE RETRIEVER ======================
+def load_retriever(collection_name: str):
+    chroma_client = chromadb.PersistentClient(path=f"./chroma_db/{collection_name}")
+    chroma_collection = chroma_client.get_or_create_collection(collection_name)
+    vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+    index = VectorStoreIndex.from_vector_store(
+        vector_store,
+        embed_model=embed_model,
+    )
+    return index.as_retriever(similarity_top_k=3)
+
+retriever = load_retriever(ACTIVE_COLLECTION)
+system_prompt = SYSTEM_PROMPTS[ACTIVE_COLLECTION]
+
+print(f"Active collection: {ACTIVE_COLLECTION}")
 
 # ====================== MODELS ======================
 class ChatRequest(BaseModel):
@@ -60,19 +87,12 @@ class ChatResponse(BaseModel):
     response: str
     status: str = "success"
     sources: Optional[List[str]] = None
-
-# ====================== SYSTEM PROMPT ======================
-SYSTEM_PROMPT = """You are a helpful, professional AI assistant for Logiqbits (https://logiqbits.com/).
-You specialize in their business solutions including FiNext Lite (SME ERP & Finance), ShopAP, SaleSense CRM, HCM, Automation, and Cloud services.
-Be concise, accurate, and solution-oriented. If you don't know something, say so honestly.
-
-When relevant context is provided below, use it to answer accurately. If the context doesn't cover the question, answer from your general knowledge."""
+    collection: str = ACTIVE_COLLECTION
 
 # ====================== ROUTE ======================
 @app.post("/ai", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     try:
-        # Retrieve relevant context from ChromaDB
         retrieved_nodes = retriever.retrieve(request.message)
         context_text = "\n\n".join([n.get_content() for n in retrieved_nodes])
         sources = list(set([
@@ -83,7 +103,7 @@ async def chat(request: ChatRequest):
 
         messages: List[ChatMessage] = []
 
-        system_with_context = SYSTEM_PROMPT
+        system_with_context = system_prompt
         if context_text.strip():
             system_with_context += f"\n\n--- Relevant Context ---\n{context_text}\n------------------------"
 
@@ -103,6 +123,7 @@ async def chat(request: ChatRequest):
             response=response.message.content,
             status="success",
             sources=sources if sources else None,
+            collection=ACTIVE_COLLECTION,
         )
 
     except Exception as e:
@@ -111,4 +132,8 @@ async def chat(request: ChatRequest):
 
 @app.get("/health")
 async def health():
-    return {"status": "healthy", "message": "Logiqbits AI Wrapper with RAG"}
+    return {
+        "status": "healthy",
+        "active_collection": ACTIVE_COLLECTION,
+        "message": f"Logiqbits AI Wrapper — Collection: {ACTIVE_COLLECTION}"
+    }

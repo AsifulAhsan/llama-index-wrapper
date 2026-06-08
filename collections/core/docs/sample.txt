@@ -1,0 +1,24 @@
+FiNext Lite — SME ERP & Finance by Logiqbits
+
+FiNext Lite is an all-in-one ERP and financial management solution built specifically for small and medium-sized enterprises.
+
+Key Features:
+- Financial Management: General ledger, accounts payable, accounts receivable, bank reconciliation, and financial statements.
+- Inventory Management: Track stock levels, manage warehouses, set reorder points, and handle purchase orders and goods receipts.
+- Sales & Invoicing: Create quotations, sales orders, invoices, and receipts. Track payment status and overdue invoices.
+- Purchase Management: Raise purchase orders, manage suppliers, track deliveries, and process vendor invoices.
+- Reporting: Profit & loss statements, balance sheets, cash flow reports, and tax summaries.
+- Multi-currency Support: Handle transactions in multiple currencies with automatic exchange rate updates.
+
+ShopAP — Accounts Payable Automation:
+ShopAP is Logiqbits' accounts payable automation tool integrated within the Core suite.
+- Automates invoice capture from emails and scanned documents.
+- Three-way matching between purchase orders, goods receipts, and vendor invoices.
+- Approval workflows for invoice sign-off before payment.
+- Scheduled payment runs with bank integration.
+
+Common Use Cases:
+- A finance manager wants to generate a monthly profit and loss report.
+- A warehouse manager wants to check current stock levels and trigger a reorder.
+- An accountant wants to reconcile bank statements against recorded transactions.
+- A business owner wants to see which vendor invoices are overdue for payment.
